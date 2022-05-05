@@ -1,0 +1,40 @@
+## A Datalog program for computing accese relations
+## Author: Ali Ghanbari (ali.ghanbari@utdallas.edu)
+
+## M is the domain of all application method
+.include "M.dom"
+## F is the domain of all field in application classe
+.include "F.dom"
+
+.bddvarorder M0xM1_F0
+
+may_call            (m:M0, n:M1)    input
+directly_reads      (m:M0, f:F0)    input
+directly_writes     (m:M0, f:F0)    input
+static_field        (f : F0)        input
+instance_field      (f : F0)        input
+
+instance_reads      (m:M0, f:F0)    output
+## instance_accesses   (m:M0, f:F0)    output
+static_reads        (m:M0, f:F0)    output
+static_accesses     (m:M0, f:F0)    output
+## instance_writes     (m:M0, f:F0)    output
+static_writes       (m:M0, f:F0)    output
+
+instance_reads(m, f) :- directly_reads(m, f), instance_field(f).
+instance_reads(m, f) :- may_call(m, n), instance_reads(n, f).
+
+## instance_writes(m, f) :- directly_writes(m, f), instance_field(f).
+## instance_writes(m, f) :- may_call(m, n), instance_writes(n, f).
+
+## instance_accesses(m, f) :- instance_reads(m, f).
+## instance_accesses(m, f) :- instance_writes(m, f).
+
+static_reads(m, f) :- directly_reads(m, f), static_field(f).
+static_reads(m, f) :- may_call(m, n), static_reads(n, f).
+
+static_writes(m, f) :- directly_writes(m, f), static_field(f).
+static_writes(m, f) :- may_call(m, n), static_writes(n, f).
+
+static_accesses(m, f) :- static_reads(m, f).
+static_accesses(m, f) :- static_writes(m, f).

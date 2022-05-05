@@ -1,0 +1,14 @@
+## This program simply calculates the relation >> out of >
+## Author: Ali Ghanbari (ali.ghanbari@utdallas.edu)
+
+## M is the domain of all application methods
+.include "M.dom"
+
+.bddvarorder M0xM1
+
+idom    (m:M0, n:M1) input
+
+dom     (m:M0, n:M1) output
+
+dom(m, n) :- idom(m, n).
+dom(m, n) :- dom(m, l), dom(l, n).

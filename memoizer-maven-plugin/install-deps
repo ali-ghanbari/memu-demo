@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "Installing object-utils 1.4-SNAPSHOT..."
+mvn install:install-file -Dfile=./object-utils/object-utils-1.4-SNAPSHOT.jar -DpomFile=./object-utils/pom.xml

@@ -1,0 +1,14 @@
+## A Datalog program for computing transitive closure of the inverse of the call graph
+## Author: Ali Ghanbari (ali.ghanbari@utdallas.edu)
+
+## M is the domain of all application methods
+.include "M.dom"
+
+.bddvarorder M0xM1_M2
+
+may_call         (m:M0, n:M1) input
+
+implicates       (m:M1, n:M2) output
+
+implicates(m, n) :- may_call(n, m).
+implicates(m, o) :- implicates(m, n), implicates(n, o).
