@@ -164,10 +164,17 @@ Again, since we have already configured the POM file for the project, you do not
 For other projects, you want to follow the instruction given [here](https://pitest.org/quickstart/maven/) to set up PITest.
 
 You can compare this version of PIT with an original version to appreciate the speed-up!
-This can be done by removing the modified version, using the following Unix command the invoking PIT once again.
+This can be done by removing the modified PIT version using the following command.
+
+:warning: The command that you are about to execute will delete all downloaded versions of PITest; please use it responsibly.
 
 ```shell
 rm -rf ~/.m2/repository/org/pitest
+```
+
+And invoking PIT once again as follows.
+
+```shell
 mvn org.pitest:pitest-maven:mutationCoverage
 ```
 
